@@ -1,20 +1,18 @@
 # https://bbs.archlinux.org/viewtopic.php?id=117157
 if [[ -d $HOME/.mozilla/aurora ]]; then
-    profileArr=( $(grep '[P,p]'ath= $HOME/.mozilla/aurora/profiles.ini |
-    sed 's/[P,p]ath=//') )
-    index=0
     PSNAME="aurora"
-    for profileItem in ${profileArr[@]}; do
-        if [[ $(echo $profileItem | cut -c1) = "/" ]]; then
+    index=0
+    while read -r profileItem; do
+        if [[ $profileItem = /* ]]; then
             # path is not relative
             DIRArr[index]="$profileItem"
         else
-            # we need to append the default path to give a fully
-            # qualified path
+            # we need to prepend the default path to give a
+            # fully qualified path
             DIRArr[index]="$HOME/.mozilla/aurora/$profileItem"
         fi
-        index=$index+1
-    done
+        ((index++))
+    done < <(awk -F= '/[Pp]ath=/{print $2}' "$HOME/.mozilla/aurora/profiles.ini")
 fi
 
 check_suffix=1

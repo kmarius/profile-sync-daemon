@@ -1,19 +1,17 @@
 if [[ -d $HOME/.mozilla/firefox-trunk ]]; then
-    profileArr=( $(grep '[P,p]'ath= $HOME/.mozilla/firefox-trunk/profiles.ini |
-    sed 's/[P,p]ath=//') )
-    index=0
     PSNAME="$browser"
-    for profileItem in ${profileArr[@]}; do
-        if [[ $(echo $profileItem | cut -c1) = "/" ]]; then
+    index=0
+    while read -r profileItem; do
+        if [[ $profileItem = /* ]]; then
             # path is not relative
             DIRArr[index]="$profileItem"
         else
-            # we need to append the default path to give a fully
-            # qualified path
+            # we need to prepend the default path to give a
+            # fully qualified path
             DIRArr[index]="$HOME/.mozilla/firefox-trunk/$profileItem"
         fi
-        index=$index+1
-    done
+        ((index++))
+    done < <(awk -F= '/[Pp]ath=/{print $2}' "$HOME/.mozilla/firefox-trunk/profiles.ini")
 fi
 
 check_suffix=1
