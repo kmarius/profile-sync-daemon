@@ -514,6 +514,7 @@ do_sync() {
   echo "USE_OVERLAYFS=\"$USE_OVERLAYFS\"" >> "$PSDCONFDIR/.psd.conf"
   echo "BROWSERS=\"${BROWSERS[*]}\"" >> "$PSDCONFDIR/.psd.conf"
   echo "USE_BACKUPS=\"$USE_BACKUPS\"" >> "$PSDCONFDIR/.psd.conf"
+  echo "BACKUP_LIMIT=\"$BACKUP_LIMIT\"" >> "$PSDCONFDIR/.psd.conf"
   chmod 400 "$PSDCONFDIR/.psd.conf"
 }
 
