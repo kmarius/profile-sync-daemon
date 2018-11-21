@@ -1,2 +1,4 @@
 DIRArr[0]="$HOME/.local/share/$browser"
 PSNAME="$browser"
+
+# vim: set ft=sh ts=4 sw=4 et:

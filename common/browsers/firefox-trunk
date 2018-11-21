@@ -17,3 +17,5 @@ if [[ -d $HOME/.mozilla/firefox-trunk ]]; then
 fi
 
 check_suffix=1
+
+# vim: set ft=sh ts=4 sw=4 et:

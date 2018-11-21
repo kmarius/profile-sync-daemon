@@ -1,2 +1,4 @@
 DIRArr[0]="$HOME/.$browser"
 PSNAME="xulrunner"
+
+# vim: set ft=sh ts=4 sw=4 et:
